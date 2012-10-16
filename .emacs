@@ -3,12 +3,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Basic settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; load Steve Purcell's super configuration bundle
 (load "~/.emacs.d/init.el")
 
 ;; set personal info
-(setq user-full-name "Yanming Wang")
+(setq user-full-name "Michael Wang")
 
 (require 'color-theme)
 (eval-after-load "color-theme"
@@ -17,6 +16,11 @@
 (color-theme-initialize)
 (color-theme-dark-blue2)
 
+
+;; set latitude and longitude
+(setq calendar-latitude +39.9)
+(setq calendar-longitude +116.3)
+(setq calendar-location-name "Beijing")
 
 ;;显示行列号
 (setq column-number-mode t)
@@ -56,31 +60,29 @@
 
 (require 'ido)
 (ido-mode t)
-;; set indent using tab
-;(setq-default indent-tabs-mode nil)
-;(setq default-tab-width 8)
-;(setq tab-stop-list ())
-;(loop for x downfrom 40 to 1 do
-;      (setq tab-stop-list (cons (* x 4) tab-stop-list)))
-
-;;========================================
-;; 键绑定
-;;========================================
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Global key mapping
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key [M-left] 'windmove-left)
+(global-set-key [M-right] 'windmove-right)
+(global-set-key [M-up] 'windmove-up)
+(global-set-key [M-down] 'windmove-down)
+(global-set-key [f1] 'goto-line);设置M-g为goto-line
+(global-set-key [(f2)] 'speedbar);打开speedbar
+;; refresh buffer
+(global-set-key (kbd "C-c r") 'revert-buffer)
+;(global-set-key [(f8)] 'other-window)
+;(global-set-key [(f4)] 'ibuffer)
+(global-set-key [C-f4] 'kill-this-buffer)
+;; regex replace
+(global-set-key (kbd "M-#") 'query-replace-regexp)
+;; binding goto-line
+;;(global-set-key (kbd "M-g") 'goto-line)
 ;; C-z 设置记 ;;  C-z:M-x iconify-or-deiconify-frame:C-z,C-x C-z
 (global-set-key (kbd "C-z") 'set-mark-command)
-
 ;;WIN+s进入Shell ;; M-x shell
-(global-set-key (kbd "s-s") 'shell)
+(global-set-key (kbd "s-s") 'shell):
 ;;(define-key ctl-x-map "\M-s" 'shell)
-
-;;WIN+space 设置标记
-(global-set-key (kbd "s-SPC") 'set-mark-command)
-
-;; set latitude and longitude
-(setq calendar-latitude +39.9)
-(setq calendar-longitude +116.3)
-(setq calendar-location-name "Beijing")
 
 ;; default to better frame titles
 (setq frame-title-format (concat  "%b - emacs@" (system-name)))
@@ -178,7 +180,7 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
 (global-set-key (kbd "C-c z") 'eshell)
-;(global-set-key (kbd "<f9>") 'rename-buffer)
+(global-set-key (kbd "<f9>") 'rename-buffer)
 
 ;; enable copying contents from emacs to the other programs
 (when (eq window-system 'x) (setq x-select-enable-clipboard t))
@@ -196,6 +198,14 @@
 (setq-default show-trailing-whitespace nil)
 (setq default-fill-column 100)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Look & feel
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(set-foreground-color "white")
+(set-background-color "black")
+
+(setq-default custom-enabled-themes '(sanityinc-tomorrow-bright))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Java mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -205,8 +215,8 @@
   (c-set-style "java")
   (c-toggle-auto-state)
   (c-toggle-hungry-state)
-  (setq c-basic-offset 4)
-  (setq c-indent-level 4)
+  (setq c-basic-offset 2)
+  (setq c-indent-level 2)
   (imenu-add-menubar-index)
   (which-function-mode)
 )
@@ -219,16 +229,16 @@
 
 (add-hook 'python-mode-hook
   (lambda ()
-    (set-variable 'py-indent-offset 4)
+    (set-variable 'py-indent-offset 2)
     ;(set-variable 'py-smart-indentation nil)
     (set-variable 'indent-tabs-mode nil)
     (define-key python-mode-map (kbd "RET") 'newline-and-indent)
     ;(setq yas/after-exit-snippet-hook 'indent-according-to-mode)
-    (smart-operator-mode-on)
-))
+    ;(smart-operator-mode-on)
+ ))
 
 ;; pdb setup, note the python version
-(setq pdb-path '/usr/local/lib/python2.7/pdb.py
+(setq pdb-path '/usr/lib/python2.7/pdb.py
        gud-pdb-command-name (symbol-name pdb-path))
 
 (defadvice pdb (before gud-query-cmdline activate)
@@ -251,8 +261,8 @@
   (define-key c++-mode-map [(control c) (c)] 'compile)
   (interactive)
   (c-set-offset 'substatement-open 0)
-  (setq c-basic-offset 4)
-  (setq c-indent-level 4)
+  (setq c-basic-offset 2)
+  (setq c-indent-level 2)
   ;;(c-set-style "K&R")
   ;;(c-toggle-auto-state)
   ;;(c-toggle-hungry-state)
@@ -264,8 +274,8 @@
   (define-key c++-mode-map [(control c) (c)] 'compile)
   (interactive)
   (c-set-offset 'substatement-open 0)
-  (setq c-basic-offset 4)
-  (setq c-indent-level 4)
+  (setq c-basic-offset 2)
+  (setq c-indent-level 2)
   ;;(c-set-style "K&R")
   ;;(c-toggle-auto-state)
   ;;(c-toggle-hungry-state)
@@ -320,130 +330,61 @@
          '(try-complete-file-name try-complete-file-name-partially)))
     (call-interactively 'hippie-expand)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Global key mapping
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key [M-left] 'windmove-left)
-(global-set-key [M-right] 'windmove-right)
-(global-set-key [M-up] 'windmove-up)
-(global-set-key [M-down] 'windmove-down)
-(global-set-key [f1] 'goto-line);设置M-g为goto-line
-;(global-set-key [f2] 'split-window-horizontally );
-(global-set-key [(f2)] 'speedbar);打开speedbar
-;; refresh buffer
-(global-set-key (kbd "C-c r") 'revert-buffer)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; erlang mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq erlang-root-dir "/usr/local/lib/erlang")
+(setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.6.7/emacs" load-path))
+(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+(require 'erlang-start)
 
-;; regex replace
-(global-set-key (kbd "M-#") 'query-replace-regexp)
+;; This is needed for Distel setup
+(let ((distel-dir "/usr/local/share/distel/elisp"))
+  (unless (member distel-dir load-path)
+    ;; Add distel-dir to the end of load-path
+    (setq load-path (append load-path (list distel-dir)))))
 
-;; binding goto-line
-(global-set-key (kbd "M-g") 'goto-line)
-
-;;-------------------------让Emacs拥有tabs-------------------
-;;(require 'tabbar)
-;;(setq tabbar-buffer-groups-function
-;;          (lambda ()
-;;            (list "All")))
-;; 
-;;(tabbar-mode)
-;;(global-set-key [(control shift tab)] 'tabbar-backward)
-;;(global-set-key [(control tab)] 'tabbar-forward)
-;;(global-set-key (kbd "M-1") 'tabbar-backward)
-;;(global-set-key (kbd "M-2") 'tabbar-forward)
-;;
-;;;;;; 设置tabbar外观
-;;;; 设置默认主题: 字体, 背景和前景颜色，大小
-;;(set-face-attribute 'tabbar-default nil
-;;                    :family "Vera Sans YuanTi Mono"
-;;                    :background "gray80"
-;;                    :foreground "gray30"
-;;                    :height 1.0
-;;                    )
-;;;; 设置左边按钮外观：外框框边大小和颜色
-;;(set-face-attribute 'tabbar-button nil 
-;;                    :inherit 'tabbar-default
-;;                    :box '(:line-width 1 :color "gray30")
-;;                    )
-;;;; 设置当前tab外观：颜色，字体，外框大小和颜色
-;;(set-face-attribute 'tabbar-selected nil
-;;                    :inherit 'tabbar-default
-;;                    :foreground "DarkGreen"
-;;                    :background "LightGoldenrod"
-;;                    :box '(:line-width 2 :color "DarkGoldenrod")
-;;                    ;; :overline "black"
-;;                    ;; :underline "black"
-;;                    :weight 'bold
-;;                    )
-;;;; 设置非当前tab外观：外框大小和颜色
-;;(set-face-attribute 'tabbar-unselected nil
-;;                    :inherit 'tabbar-default
-;;                    :box '(:line-width 2 :color "gray70")
-;;                    )
-(require 'session)
-(add-hook 'after-init-hook 'session-initialize)
-;;(load "desktop")
-;;(desktop-load-default)
-;;(desktop-read)
-;;(setq desktop-save-mode t)
- 
-(require 'browse-kill-ring)
-(global-set-key [(control c)(k)] 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
-
-;;erlang
-;;(require 'erlang-eunit)
-;;(load "erlang_appwiz" t nil)
-;;(global-set-key [f3] 'erlang-next-error)
-;;(global-set-key [C-f7] 'erlang-compile)
-;;(global-set-key [f7] 'compile)
-;;(global-set-key [f10] 'linum-mode)
-
-;;distel
-(add-to-list 'load-path "/usr/local/share/distel/elisp")
 (require 'distel)
 (distel-setup)
+
 ;; Some Erlang customizations
 (add-hook 'erlang-mode-hook
-        (lambda ()
-              ;; when starting an Erlang shell in Emacs, default in the node name
-`              (setq inferior-erlang-machine-options '("-sname" "emacs"))
-              ;; add Erlang functions to an imenu menu
-              (imenu-add-to-menubar "imenu")))
+	  (lambda ()
+	    ;; when starting an Erlang shell in Emacs, default in the node name
+	    (setq inferior-erlang-machine-options '("-sname" "emacs"))
+	    ;; add Erlang functions to an imenu menu
+	    (imenu-add-to-menubar "imenu")))
 
 ;; A number of the erlang-extended-mode key bindings are useful in the shell too
 (defconst distel-shell-keys
   '(("\C-\M-i"   erl-complete)
-    ("\M-?"      erl-complete)
+    ("\M-?"      erl-complete)	
     ("\M-."      erl-find-source-under-point)
-    ("\M-,"      erl-find-source-unwind)
-    ("\M-*"      erl-find-source-unwind)
+    ("\M-,"      erl-find-source-unwind) 
+    ("\M-*"      erl-find-source-unwind) 
     )
   "Additional keys to bind when in Erlang shell.")
 
 (add-hook 'erlang-shell-mode-hook
-        (lambda ()
-              ;; add some Distel bindings to the Erlang shell
-              (dolist (spec distel-shell-keys)
-                  (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;代码跳转;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key [f8] 'semantic-ia-fast-jump)
-(global-set-key [S-f8]
-(lambda ()
-(interactive)
-(if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
-(error "Semantic Bookmark ring is currently empty"))
-(let* ((ring (oref semantic-mru-bookmark-ring ring))
-(alist (semantic-mrub-ring-to-assoc-list ring))
-(first (cdr (car alist))))
-(if (semantic-equivalent-tag-p (oref first tag)
-(semantic-current-tag))
-(setq first (cdr (car (cdr alist)))))
-(semantic-mrub-switch-tags first))))
-(define-key c-mode-base-map [M-f1] 'semantic-analyze-proto-impl-toggle)
+	  (lambda ()
+	    ;; add some Distel bindings to the Erlang shell
+	    (dolist (spec distel-shell-keys)
+	      (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;注释/反注释
+(defun qiang-comment-dwim-line (&optional arg)
+  "Replacement for the comment-dwim command.
+If no region is selected and current line is not blank and we are not at the end of the line,
+then comment current line.
+Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+(global-set-key "\M-;" 'qiang-comment-dwim-line)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; copy region or whole line
 (global-set-key "\M-w"
                 (lambda ()
@@ -474,8 +415,7 @@
 (global-set-key [(control ?\,)] 'ska-jump-to-register) 
 (defun ska-point-to-register() 
 "Store cursorposition _fast_ in a register. 
-Use ska-jump-to-register to jump back to the stored 
-position." 
+Use ska-jump-to-register to jump back to the stored position." 
 (interactive) 
 (setq zmacs-region-stays t) 
 (point-to-register 8)) 
@@ -501,3 +441,4 @@ char)
 (setq unread-command-events (list last-input-event))) 
 
 (define-key global-map (kbd "C-c a") 'wy-go-to-char) 
+
