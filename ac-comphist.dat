@@ -1,6 +1,22 @@
-((("color-theme-dark-blue2" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0])
+((("func" .
+   [3 0 0 0])
+  ("load-file" .
+   [0 0 0 0 0 0 1 0 0])
+  ("load" .
+   [1 0 0 0])
+  ("color-theme-blackboard" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("color-theme-faces" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
   ("color-theme-xp" .
    [0 0 0 0 0 0 0 0 0 0 0 0 1 0])
-  ("color-theme-faces" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])))
+  ("color-theme-dark-blue2" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("sssss" .
+   [1 0 0 0 0])
+  ("ssss" .
+   [1 0 0 0])
+  ("aaaaa" .
+   [2 0 0 0 0])
+  ("pending" .
+   [1 0 1 0 0 0 0])))
