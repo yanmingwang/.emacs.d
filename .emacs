@@ -16,7 +16,6 @@
 (color-theme-initialize)
 (color-theme-dark-blue2)
 
-
 ;; set latitude and longitude
 (setq calendar-latitude +39.9)
 (setq calendar-longitude +116.3)
@@ -46,17 +45,17 @@
 ;; 设置 hippie-expand 很好用的功能。 M-x hippie-expand
 (setq hippie-expand-try-functions-list
       '(
-        try-expand-dabbrev
-        try-expand-dabbrev-visible
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-all-abbrevs
-        try-expand-list3
-        try-expand-line
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol))
+	try-expand-dabbrev
+	try-expand-dabbrev-visible
+	try-expand-dabbrev-all-buffers
+	try-expand-dabbrev-from-kill
+	try-complete-file-name-partially
+	try-complete-file-name
+	try-expand-all-abbrevs
+	try-expand-list3
+	try-expand-line
+	try-complete-lisp-symbol-partially
+	try-complete-lisp-symbol))
 
 (require 'ido)
 (ido-mode t)
@@ -161,16 +160,16 @@
 ;; dired
 (setq dired-omit-extensions
       '(
-        ".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico"
-        ".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd"
-        ".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".fmt" ".tfm"
-        ".class" ".lib" ".mem" ".x86f" ".sparcf" ".fasl"
-        ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo"
-        ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr"
-        ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo"
-        ".idx" ".lof" ".lot" ".glo" ".blg" ".bbl" ".cps" ".fn"
-        ".fns" ".ky" ".kys" ".pg" ".pgs" ".tp" ".tps" ".vr" ".vrs"
-        ".pdb" ".ilk"))
+	".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico"
+	".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd"
+	".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".fmt" ".tfm"
+	".class" ".lib" ".mem" ".x86f" ".sparcf" ".fasl"
+	".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo"
+	".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr"
+	".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo"
+	".idx" ".lof" ".lot" ".glo" ".blg" ".bbl" ".cps" ".fn"
+	".fns" ".ky" ".kys" ".pg" ".pgs" ".tp" ".tps" ".vr" ".vrs"
+	".pdb" ".ilk"))
 (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.\\|^~")
 (setq dired-recursive-copies 'top)
 (setq dired-recursive-deletes 'top)
@@ -198,14 +197,7 @@
 (setq-default show-trailing-whitespace nil)
 (setq default-fill-column 100)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Look & feel
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(set-foreground-color "white")
-(set-background-color "black")
-
-(setq-default custom-enabled-themes '(sanityinc-tomorrow-bright))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Java mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -236,14 +228,14 @@
  ))
 
 ;; pdb setup, note the python version
-(setq pdb-path '/usr/lib/python2.7/pdb.py
+(setq pdb-path '/usr/local/lib/python2.7/pdb.py
        gud-pdb-command-name (symbol-name pdb-path))
 
 (defadvice pdb (before gud-query-cmdline activate)
   "Provide a better default command line when called interactively."
   (interactive
    (list (gud-query-cmdline pdb-path
-                            (file-name-nondirectory buffer-file-name)))))
+			    (file-name-nondirectory buffer-file-name)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++ mode
@@ -305,18 +297,18 @@
 
 (setq hippie-expand-try-functions-list
       '(try-expand-line
-        try-expand-dabbrev
-        try-expand-line-all-buffers
-        try-expand-list
-        try-expand-list-all-buffers
-        try-expand-dabbrev-visible
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-file-name
-        try-complete-file-name-partially
-        try-complete-lisp-symbol
-        try-complete-lisp-symbol-partially
-        try-expand-whole-kill))
+	try-expand-dabbrev
+	try-expand-line-all-buffers
+	try-expand-list
+	try-expand-list-all-buffers
+	try-expand-dabbrev-visible
+	try-expand-dabbrev-all-buffers
+	try-expand-dabbrev-from-kill
+	try-complete-file-name
+	try-complete-file-name-partially
+	try-complete-lisp-symbol
+	try-complete-lisp-symbol-partially
+	try-expand-whole-kill))
 
 (global-set-key (kbd "M-;") 'dabbrev-expand)
 (global-set-key (kbd "M-'") 'hippie-expand)
@@ -325,7 +317,7 @@
 (defun wd-hippie-expand-filename ()
   (interactive)
   (let ((hippie-expand-try-functions-list
-         '(try-complete-file-name try-complete-file-name-partially)))
+	 '(try-complete-file-name try-complete-file-name-partially)))
     (call-interactively 'hippie-expand)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -342,30 +334,29 @@
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
 (require 'erlang-start)
 (defun my-erlang-mode-hook ()
-        ;; when starting an Erlang shell in Emacs, default in the node name
-        (setq inferior-erlang-machine-options '("-sname" "emacs"))
-        ;; add Erlang functions to an imenu menu
-        (imenu-add-to-menubar "imenu")
-        ;; customize keys
-        (local-set-key [return] 'newline-and-indent)
-        )
+	;; when starting an Erlang shell in Emacs, default in the node name
+	(setq inferior-erlang-machine-options '("-sname" "emacs"))
+	;; add Erlang functions to an imenu menu
+	(imenu-add-to-menubar "imenu")
+	;; customize keys
+	(local-set-key [return] 'newline-and-indent)
+	)
 ;; Some Erlang customizations
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
-
 (defconst distel-shell-keys
-  '(("\C-\M-i"   erl-complete)
-    ("\M-?"      erl-complete)
-    ("\M-."      erl-find-source-under-point)
-    ("\M-,"      erl-find-source-unwind)
-    ("\M-*"      erl-find-source-unwind)
+  '(("\C-\M-i"	 erl-complete)
+    ("\M-?"	 erl-complete)
+    ("\M-."	 erl-find-source-under-point)
+    ("\M-,"	 erl-find-source-unwind)
+    ("\M-*"	 erl-find-source-unwind)
     )
   "Additional keys to bind when in Erlang shell.")
 
 (add-hook 'erlang-shell-mode-hook
       (lambda ()
        ;; add some Distel bindings to the Erlang shell
-         (dolist (spec distel-shell-keys)
-            (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
+	 (dolist (spec distel-shell-keys)
+	    (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;注释/反注释
 (defun qiang-comment-dwim-line (&optional arg)
@@ -382,58 +373,80 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; copy region or whole line
 (global-set-key "\M-w"
-                (lambda ()
-                  (interactive)
-                  (if mark-active
-                      (kill-ring-save (region-beginning)
-                                      (region-end))
-                    (progn
-                     (kill-ring-save (line-beginning-position)
-                                     (line-end-position))
-                     (message "copied line")))))
+		(lambda ()
+		  (interactive)
+		  (if mark-active
+		      (kill-ring-save (region-beginning)
+				      (region-end))
+		    (progn
+		     (kill-ring-save (line-beginning-position)
+				     (line-end-position))
+		     (message "copied line")))))
 
 ;; kill region or whole line
 (global-set-key "\C-w"
-                (lambda ()
-                  (interactive)
+		(lambda ()
+		  (interactive)
 
-                  (if mark-active
-                      (kill-region (region-beginning)
-                                   (region-end))
-                    (progn
-                     (kill-region (line-beginning-position)
-                                  (line-end-position))
-                     (message "killed line")))))
+		  (if mark-active
+		      (kill-region (region-beginning)
+				   (region-end))
+		    (progn
+		     (kill-region (line-beginning-position)
+				  (line-end-position))
+		     (message "killed line")))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  tag and jump
-(global-set-key [(control ?\.)] 'ska-point-to-register) 
-(global-set-key [(control ?\,)] 'ska-jump-to-register) 
-(defun ska-point-to-register() 
-"Store cursorposition _fast_ in a register. 
-Use ska-jump-to-register to jump back to the stored position." 
-(interactive) 
-(setq zmacs-region-stays t) 
-(point-to-register 8)) 
+(global-set-key [(control ?\.)] 'ska-point-to-register)
+(global-set-key [(control ?\,)] 'ska-jump-to-register)
+(defun ska-point-to-register()
+"Store cursorposition _fast_ in a register.
+Use ska-jump-to-register to jump back to the stored position."
+(interactive)
+(setq zmacs-region-stays t)
+(point-to-register 8))
 
-(defun ska-jump-to-register() 
-"Switches between current cursorposition and position 
-that was stored with ska-point-to-register." 
-(interactive) 
-(setq zmacs-region-stays t) 
-(let ((tmp (point-marker))) 
-(jump-to-register 8)  
+(defun ska-jump-to-register()
+"Switches between current cursorposition and position
+that was stored with ska-point-to-register."
+(interactive)
+(setq zmacs-region-stays t)
+(let ((tmp (point-marker)))
+(jump-to-register 8)
 (set-register 8 tmp)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun wy-go-to-char (n char) 
-"Move forward to Nth occurence of CHAR. 
-Typing `wy-go-to-char-key' again will move forwad to the next Nth 
-occurence of CHAR." 
-(interactive "p\ncGo to char: ") 
-(search-forward (string char) nil nil n) 
-(while (char-equal (read-char) 
-char) 
-(search-forward (string char) nil nil n)) 
-(setq unread-command-events (list last-input-event))) 
+(defun wy-go-to-char (n char)
+"Move forward to Nth occurence of CHAR.
+Typing `wy-go-to-char-key' again will move forwad to the next Nth
+occurence of CHAR."
+(interactive "p\ncGo to char: ")
+(search-forward (string char) nil nil n)
+(while (char-equal (read-char)
+char)
+(search-forward (string char) nil nil n))
+(setq unread-command-events (list last-input-event)))
 
-(define-key global-map (kbd "C-c a") 'wy-go-to-char) 
+(define-key global-map (kbd "C-c a") 'wy-go-to-char)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+remove useless spaces when save file
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Add save buffer hook
+(defun reed_update_file()
+	"Convert spaces to tabs, and remove useless spaces"
+	(interactive)
+
+	;; Remove useless spaces
+	(edit-picture)
+	(picture-mode-exit)
+
+	;; Convert spaces to tabs
+	(tabify (point-min) (point-max))
+
+	;; Save buffer
+	;;(basic-save-buffer)
+)
+
+;; Add-hook to automate the task when we save files
+(add-hook 'write-file-hooks 'reed_update_file)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
