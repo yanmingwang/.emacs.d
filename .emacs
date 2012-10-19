@@ -1,4 +1,4 @@
-; .emacs
+					; .emacs
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Basic settings
@@ -70,8 +70,8 @@
 (global-set-key [(f2)] 'speedbar);打开speedbar
 ;; refresh buffer
 (global-set-key (kbd "C-c r") 'revert-buffer)
-;(global-set-key [(f8)] 'other-window)
-;(global-set-key [(f4)] 'ibuffer)
+					;(global-set-key [(f8)] 'other-window)
+					;(global-set-key [(f4)] 'ibuffer)
 (global-set-key [C-f4] 'kill-this-buffer)
 ;; regex replace
 (global-set-key (kbd "M-#") 'query-replace-regexp)
@@ -114,7 +114,7 @@
 (modify-coding-system-alist 'process "*" 'utf-8)
 
 ;; always end a file with a newline
-;(setq require-final-newline 'query)
+					;(setq require-final-newline 'query)
 
 ;; set default mode, instead of fundamental-mode
 (setq default-major-mode 'text-mode)
@@ -211,25 +211,25 @@
   (setq c-indent-level 2)
   (imenu-add-menubar-index)
   (which-function-mode)
-)
+  )
 (add-hook 'java-mode-hook 'linux-java-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'python-mode-hook
-  (lambda ()
-    (set-variable 'py-indent-offset 2)
-    ;(set-variable 'py-smart-indentation nil)
-    (set-variable 'indent-tabs-mode nil)
-    (define-key python-mode-map (kbd "RET") 'newline-and-indent)
-    ;(setq yas/after-exit-snippet-hook 'indent-according-to-mode)
-    ;(smart-operator-mode-on)
- ))
+	  (lambda ()
+	    (set-variable 'py-indent-offset 2)
+					;(set-variable 'py-smart-indentation nil)
+	    (set-variable 'indent-tabs-mode nil)
+	    (define-key python-mode-map (kbd "RET") 'newline-and-indent)
+					;(setq yas/after-exit-snippet-hook 'indent-according-to-mode)
+					;(smart-operator-mode-on)
+	    ))
 
 ;; pdb setup, note the python version
 (setq pdb-path '/usr/local/lib/python2.7/pdb.py
-       gud-pdb-command-name (symbol-name pdb-path))
+      gud-pdb-command-name (symbol-name pdb-path))
 
 (defadvice pdb (before gud-query-cmdline activate)
   "Provide a better default command line when called interactively."
@@ -334,13 +334,13 @@
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
 (require 'erlang-start)
 (defun my-erlang-mode-hook ()
-	;; when starting an Erlang shell in Emacs, default in the node name
-	(setq inferior-erlang-machine-options '("-sname" "emacs"))
-	;; add Erlang functions to an imenu menu
-	(imenu-add-to-menubar "imenu")
-	;; customize keys
-	(local-set-key [return] 'newline-and-indent)
-	)
+  ;; when starting an Erlang shell in Emacs, default in the node name
+  (setq inferior-erlang-machine-options '("-sname" "emacs"))
+  ;; add Erlang functions to an imenu menu
+  (imenu-add-to-menubar "imenu")
+  ;; customize keys
+  (local-set-key [return] 'newline-and-indent)
+  )
 ;; Some Erlang customizations
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 (defconst distel-shell-keys
@@ -353,10 +353,10 @@
   "Additional keys to bind when in Erlang shell.")
 
 (add-hook 'erlang-shell-mode-hook
-      (lambda ()
-       ;; add some Distel bindings to the Erlang shell
-	 (dolist (spec distel-shell-keys)
-	    (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
+	  (lambda ()
+	    ;; add some Distel bindings to the Erlang shell
+	    (dolist (spec distel-shell-keys)
+	      (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;注释/反注释
 (defun qiang-comment-dwim-line (&optional arg)
@@ -379,9 +379,9 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
 		      (kill-ring-save (region-beginning)
 				      (region-end))
 		    (progn
-		     (kill-ring-save (line-beginning-position)
-				     (line-end-position))
-		     (message "copied line")))))
+		      (kill-ring-save (line-beginning-position)
+				      (line-end-position))
+		      (message "copied line")))))
 
 ;; kill region or whole line
 (global-set-key "\C-w"
@@ -392,61 +392,67 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
 		      (kill-region (region-beginning)
 				   (region-end))
 		    (progn
-		     (kill-region (line-beginning-position)
-				  (line-end-position))
-		     (message "killed line")))))
+		      (kill-region (line-beginning-position)
+				   (line-end-position))
+		      (message "killed line")))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  tag and jump
 (global-set-key [(control ?\.)] 'ska-point-to-register)
 (global-set-key [(control ?\,)] 'ska-jump-to-register)
 (defun ska-point-to-register()
-"Store cursorposition _fast_ in a register.
+  "Store cursorposition _fast_ in a register.
 Use ska-jump-to-register to jump back to the stored position."
-(interactive)
-(setq zmacs-region-stays t)
-(point-to-register 8))
+  (interactive)
+  (setq zmacs-region-stays t)
+  (point-to-register 8))
 
 (defun ska-jump-to-register()
-"Switches between current cursorposition and position
+  "Switches between current cursorposition and position
 that was stored with ska-point-to-register."
-(interactive)
-(setq zmacs-region-stays t)
-(let ((tmp (point-marker)))
-(jump-to-register 8)
-(set-register 8 tmp)))
+  (interactive)
+  (setq zmacs-region-stays t)
+  (let ((tmp (point-marker)))
+    (jump-to-register 8)
+    (set-register 8 tmp)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun wy-go-to-char (n char)
-"Move forward to Nth occurence of CHAR.
+  "Move forward to Nth occurence of CHAR.
 Typing `wy-go-to-char-key' again will move forwad to the next Nth
 occurence of CHAR."
-(interactive "p\ncGo to char: ")
-(search-forward (string char) nil nil n)
-(while (char-equal (read-char)
-char)
-(search-forward (string char) nil nil n))
-(setq unread-command-events (list last-input-event)))
+  (interactive "p\ncGo to char: ")
+  (search-forward (string char) nil nil n)
+  (while (char-equal (read-char)
+		     char)
+    (search-forward (string char) nil nil n))
+  (setq unread-command-events (list last-input-event)))
 
 (define-key global-map (kbd "C-c a") 'wy-go-to-char)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-remove useless spaces when save file
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;remove useless spaces when save file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Add save buffer hook
 (defun reed_update_file()
-	"Convert spaces to tabs, and remove useless spaces"
-	(interactive)
+  "Convert spaces to tabs, and remove useless spaces"
+  (interactive)
 
-	;; Remove useless spaces
-	(edit-picture)
-	(picture-mode-exit)
+  ;; Remove useless spaces
+  (edit-picture)
+  (picture-mode-exit)
 
-	;; Convert spaces to tabs
-	(tabify (point-min) (point-max))
+  ;; Convert spaces to tabs
+  (tabify (point-min) (point-max))
 
-	;; Save buffer
-	;;(basic-save-buffer)
-)
+  ;; Save buffer
+  ;;(basic-save-buffer)
+  )
 
 ;; Add-hook to automate the task when we save files
 (add-hook 'write-file-hooks 'reed_update_file)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;格式化整个文件函数
+;; (defun indent-whole ()
+;;   (interactive)
+;;   (indent-region (point-min) (point-max))
+;;   (message "format successfully"))
+;; ;;绑定到F7键
+;; (global-set-key [f7] 'indent-whole)
