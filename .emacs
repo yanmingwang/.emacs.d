@@ -67,7 +67,11 @@
 (global-set-key [M-up] 'windmove-up)
 (global-set-key [M-down] 'windmove-down)
 (global-set-key [f1] 'goto-line);设置M-g为goto-line
-(global-set-key [(f2)] 'speedbar);打开speedbar
+
+(define-key-after (lookup-key global-map [menu-bar tools])
+  [speedbar] '("Speedbar" . speedbar-frame-mode) [calendar])
+(global-set-key [(f2)] 'speedbar-get-focus);打开speedbar
+
 ;; refresh buffer
 (global-set-key (kbd "C-c r") 'revert-buffer)
 					;(global-set-key [(f8)] 'other-window)
@@ -196,7 +200,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default show-trailing-whitespace nil)
 (setq default-fill-column 100)
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(setq load-path (cons "~/.emacs.d/rails" load-path))
+;;(require 'rails)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Java mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -440,7 +446,7 @@ occurence of CHAR."
   (picture-mode-exit)
 
   ;; Convert spaces to tabs
-  (tabify (point-min) (point-max))
+  ;; tabify (point-min) (point-max)
 
   ;; Save buffer
   ;;(basic-save-buffer)
@@ -450,9 +456,10 @@ occurence of CHAR."
 (add-hook 'write-file-hooks 'reed_update_file)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;格式化整个文件函数
-;; (defun indent-whole ()
-;;   (interactive)
-;;   (indent-region (point-min) (point-max))
-;;   (message "format successfully"))
-;; ;;绑定到F7键
-;; (global-set-key [f7] 'indent-whole)
+(defun indent-whole ()
+  (interactive)
+  (indent-region (point-min) (point-max))
+  (message "format successfully"))
+;;绑定到F7键
+(global-set-key [f4] 'indent-whole)
+(require 'magit)
